@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Word WandAI</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="/static/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+    <link rel="shortcut icon" href="/static/imgs/fabicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <div class="top-header">
+        <div class="container-fluid bg-light border-bottom">
+            <div class="row my-2 align-items-center">
+                <div class="col">
+                    <div class="logo text-left">
+                        <img src="/static/imgs/logo.png" alt="logo" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col">
+                    <h6 class="logged-in-user text-end"></h6>
+                </div>
+            </div>
+        </div> 
+    </div>       
+    <div class="tabs-panel tabs-panel-custom">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4 col-xl-3">
+                    
+                        <div class="nav  side-nav flex-column nav-pills bg-white me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-accounts" type="button" role="tab" aria-controls="v-pills-accounts" aria-selected="false">Accounts</button>
+                            <button class="nav-link" id="v-pills-invoices-tab" data-bs-toggle="pill" data-bs-target="#v-pills-invoices" type="button" role="tab" aria-controls="v-pills-invoices" aria-selected="false">Invoices</button>
+                        </div>
+            
+                </div>
+                <div class="col-12 col-md-8 col-xl-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-accounts" role="tabpanel" aria-labelledby="v-pills-accounts-tab" tabindex="0">
+                            <div class="users_info mt-5 mb-5 row">
+                                <div class="col-9">
+                                    <p><strong>Current Plan:</strong> <span class="user_plan_title">{{active_plan}}</span></p>
+                                </div>
+                                <div class="col-3 cancel_plan_div">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmation_popup" >Cancel Plan</button>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <ul class="nav price-tabs nav-tabs justify-content-center" role="tablist">
+                                    <button class="nav-link active plan-interval-tab" id="month" data-bs-toggle="tab" data-bs-target="#nav-monthly" type="button" role="tab" aria-controls="nav-monthly" aria-selected="true">Monthly</button>
+                                    <button class="nav-link plan-interval-tab" id="year" data-bs-toggle="tab" data-bs-target="#nav-yearly" type="button" role="tab" aria-controls="nav-yearly" aria-selected="false">Yearly</button>
+                                </ul>
+                            </div>
+                            
+                            <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+                                <div class="tab-pane fade active show" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="mb-3 d-flex">
+                                                <div class="form-check">
+                                                    <input class="form-check-input position-static planCheck" name="planCheck" type="radio" id="growthPlan" value="growthPlan" aria-label="...">
+                                                  </div>
+                                                <div class="ml-3">
+                                                    <h5>Growth </h5>
+                                                    <li class="mb-0">Up to 10 Agents</li>
+                                                    <li class="mb-0">Up to 50 message rewords / day</li>
+                                                    <li class="mb-0">Basic support</li>
+                                                    <li class="mb-0">Chat and ticket integration in Zendesk</li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="mb-3 d-flex">
+                                                <div class="form-check">
+                                                    <input class="form-check-input position-static planCheck" name="planCheck" type="radio" id="professionalPlan" value="professionalPlan" aria-label="...">
+                                                </div>
+                                                <div class="ml-3">
+                                                    <h5>Professional </h5>
+                                                    <li class="mb-0">Unlimited Agents</li>
+                                                    <li class="mb-0">Premium support</li>
+                                                    <li class="mb-0">Custom AI model to match your company voice</li>
+                                                    <li class="mb-0">Chat and ticket integration in Zendesk</li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="tab-pane fade" id="nav-yearly" role="tabpanel" aria-labelledby="nav-yearly-tab">
+                                    <div class="tab-pane fade active show" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="mb-3 d-flex">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input position-static planCheck" name="planCheck" type="radio" id="growthPlan" value="growthPlan" aria-label="...">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <h5>Growth </h5>
+                                                        <li class="mb-0">Up to 10 Agents</li>
+                                                        <li class="mb-0">Up to 50 message rewords / day</li>
+                                                        <li class="mb-0">Basic support</li>
+                                                        <li class="mb-0">Chat and ticket integration in Zendesk</li>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="mb-3 d-flex">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input position-static planCheck" name="planCheck" type="radio" id="professionalPlan" value="professionalPlan" aria-label="...">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <h5>Professional </h5>
+                                                        <li class="mb-0">Unlimited Agents</li>
+                                                        <li class="mb-0">Premium support</li>
+                                                        <li class="mb-0">Custom AI model to match your company voice</li>
+                                                        <li class="mb-0">Chat and ticket integration in Zendesk</li>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% comment %} {% if subscription == 'active'%}
+                                        <button type="button" class="btn btn-primary make-payment" disabled/>Subscribe to a plan</button>
+                                        {%else%} {% endcomment %}
+                                        <button type="button" class="btn btn-primary make-payment" disabled/ >Subscribe to a plan</button>
+                                        {% comment %} {%endif%} {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        
+                        <div class="tab-pane fade" id="v-pills-invoices" role="tabpanel" aria-labelledby="v-pills-invoices-tab" tabindex="0">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="tab-pane fade show active" id="v-pills-invoice" role="tabpanel" aria-labelledby="v-pills-invoices" tabindex="0">
+                                        <h2>Invoices</h2>
+                                         <table id="invoices-table">
+                                             <thead>
+                                                 <th>Sr No.</th>
+                                                 <th>Plan</th>
+                                                 <th>Start Date</th>
+                                                 <th>End Date</th>
+                                                 <th>Status</th>
+                                                 <th>View</th>
+                                             </thead>
+                                         </table>
+                                     </div>
+                                    <div class="tab-pane d-none" id="invoices-detail">
+                                        <h2>Invoice Detail</h2>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bootstrap modal-->
+    <div class="modal fade" id="confirmation_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel? Word WandAI saves your team time, enchances their responses and improves the overall customer experience. If you do, thats ok! You will have access until the date of expiration of your purchased plan.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary confirm-cancel" >Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--ends here-->
+    
+    <script src="/static/js/siteScript/jquery.min.js"></script>
+    <script src="/static/js/siteScript/popper.min.js"></script>
+    <script src="/static/js/siteScript/bootstrap.bundle.min.js"></script>
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" ></script>
+    <script src="/static/js/siteScript/dataTable.js"></script>
+    <script src="/static/js/siteScript/dataTables.responsive.min.js"></script>
+    <script src="/static/js/siteScript/dataTable.select.min.js"></script>
+    <script src="/static/js/appScript/account_owner_dash.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wand AI</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="/static/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/imgs/fabicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <div class="top-header">
+        <div class="container-fluid bg-light border-bottom">
+            <div class="row my-2 align-items-center">
+                <div class="col">
+                    <div class="logo text-left">
+                        <img src="/static/imgs/logo.png" alt="logo" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="btn-logout text-end">
+                        <a  href="/logout/" type="button" class="btn btn-outline-primary fw-bold">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>       
+    <div class="tabs-panel tabs-panel-custom">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4 col-xl-3">
+                    <div class="nav side-nav flex-column nav-pills bg-white me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" id="v-pills-home-tab">Home</button>
+                        <button class="nav-link" id="v-pills-profile-tab" >Accounts</button>
+                        <button class="nav-link" id="v-pills-settings-tab" >Settings</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 col-xl-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                            <div class="table-heading">
+                                <h5>Plans</h5>
+                            </div>
+                            <div class="table-responsive plan-table-div">
+                            <table class="table table-sm table-striped plan-table">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">Sr No.</th>
+                                      <th scope="col">Title</th>
+                                      <th scope="col">Interval</th>
+                                      <th scope="col">Price</th>
+                                      <th scope="col">User Purchased Count</th>
+                                      <th scope="col">Rewords Per Day</th>
+                                    </tr>
+                                  </thead>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-accounts" role="tabpanel" aria-labelledby="v-pills-accounts-tab" tabindex="0">
+                            <div class="accounts-list-table ">
+                                <div class="table-search mb-3">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-4">
+                                            <!-- Actual search box -->
+                                            {% comment %} <div class="form-group has-search">
+                                                <span class="fa fa-search form-control-feedback"></span>
+                                                <input type="text" class="form-control" placeholder="Search">
+                                            </div> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-heading">
+                                    <h5>Account List</h5>
+                                </div>
+                                <div class="table-responsive account-owners-table-div">
+                                <table class="table table-sm table-striped account-owners-table">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">Sr No.</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col">Email</th>
+                                          <th scope="col">Subscription Plan</th>
+                                          <th scope="col">Billing Interval</th>
+                                          <th scope="col">Start Billing Date</th>
+                                          <th scope="col">Subscription Status</th>
+                                          {% comment %} <th scope="col">Install date</th> {% endcomment %}
+                                          <th scope="col">Last date API call</th>
+                                          <th scope="col">Action</th> 
+                                        </tr>
+                                      </thead>
+                                </table>
+                            </div>
+                            </div>
+
+                            <!-- Configure form Start Here-->
+                            <div class="configure-form d-none">
+                                <form id="configurations_by_user">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-xl-5">
+                                           <div class="card mb-3">
+                                                <div class="card-body">
+                                                     <div class="mb-2">
+                                                <h5>Reword Configure</h5>
+                                            </div>
+                                            <div class="role-config-group mb-4">
+                                                <div class="mb-2 row">
+                                                    <label for="inputRole" class="col-sm-12 mb-2">Agent Role</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-select" id="role">
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2 row">
+                                                    <label for="inputRole" class="col-sm-12 mb-2">Current Customer Sentiment</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-select" id="sentiment">
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2 row">
+                                                    <label for="inputRole" class="col-sm-12 mb-2">Reply Tone</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-select" id="tone">
+                                                         
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                                </div>
+                                           </div>
+                                           <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <h5>Yes/No/Instruct Configure</h5>
+                                                </div>
+                                            <div class="language-config-group mb-4">
+                                                <div class="mb-2 row">
+                                                    <label for="inputLanguage" class="col-sm-12 mb-2">Language</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-select" id="language">
+                                                        
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2 row">
+                                                    <label for="inputYNITone" class="col-sm-12 mb-2">Tone</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-select" id="yni_tone">
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                           <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="activity-table mb-4">
+                                                    <div class="table-responsive">
+                                                    <table class="table table-sm table-striped" id="activity_table" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr. no.</th>
+                                                                <th>Date</th>
+                                                                <th>Total Request</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                                </div>
+                                                
+                                                </div>
+                                                </div>
+                                                
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-xl-7">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 col-xl-6">
+                                            <div class="mb-2">
+                                                <h5>UI Wording</h5>
+                                            </div>
+                                            <div class="role-group user-ui-role-group mb-4">
+                                                <div>
+                                                    <label class="form-label "><strong>Agent Role</strong></label>
+                                                </div>
+                                                <div class="ui-role-select"></div>
+                                            </div>
+                                            <div class="sentiment-group user-ui-sentiment-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Current Customer Sentiment</strong></label>
+                                                </div>
+                                                <div class="ui-sentiment-select"></div>
+                                            </div>
+                                            <div class="tone-group user-ui-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Reply Tone</strong></label>
+                                                </div>
+                                                <div class="ui-tone-select"></div>
+                                            </div>
+                                            <div class="language-group user-ui-language-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Language</strong></label>
+                                                </div>
+                                                <div class="ui-language-select"></div>
+                                            </div>
+                                            <div class="yni-tone-group user-ui-yni-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Tone(Yes/No/Instruct)</strong></label>
+                                                </div>
+                                                <div class="ui-yni-tone-select"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6 col-xl-6">
+                                            <div class="mb-2">
+                                                <h5>API Wording</h5>
+                                            </div>
+                                            <div class="role-group mb-4 user-api-role-group">
+                                                <div>
+                                                    <label class="form-label"><strong>Agent Role</strong></label>
+                                                </div>
+                                                <div class="api-role-select"></div>
+                                            </div>
+                                            <div class="sentiment-group mb-4 user-api-sentiment-group">
+                                                <div>
+                                                    <label class="form-label"><strong>Current Customer Sentiment</strong></label>
+                                                </div>
+                                                <div class="api-sentiment-select"></div>
+                                            </div>
+                                            <div class="tone-group user-api-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Reply Tone</strong></label>
+                                                </div>
+                                                <div class="api-tone-select"></div>
+                                            </div>
+                                            <div class="language-group user-api-language-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Language</strong></label>
+                                                </div>
+                                                <div class="api-language-select"></div>
+                                            </div>
+                                            <div class="yni-tone-group user-api-yni-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Tone(Yes/No/Instruct)</strong></label>
+                                                </div>
+                                                <div class="api-yni-tone-select"></div>
+                                            </div>
+                                        </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12 text-center">
+                                                    <button type="button" class="btn btn-primary fw-bold submit-user-config">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                                </form>
+                            </div>
+                            <!-- Configure form End Here-->
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">
+                            <div class="settings-form">
+                                <form id="main_settings_form">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="mb-2">
+                                                <h4>UI Wording</h4>
+                                            </div>
+                                            <div class="role-group ui-role-group mb-4">
+                                                <div>
+                                                    <label class="form-label "><strong>Agent Role</strong></label>
+                                                </div>
+                                                <div class="ui-role-select"></div>
+                                            </div>
+                                            <div class="sentiment-group ui-sentiment-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Current Customer Sentiment</strong></label>
+                                                </div>
+                                                <div class="ui-sentiment-select"></div>
+                                            </div>
+                                            <div class="tone-group ui-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Reply Tone</strong></label>
+                                                </div>
+                                                <div class="ui-tone-select"></div>
+                                            </div>
+                                            <div class="language-group ui-language-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Language</strong></label>
+                                                </div>
+                                                <div class="ui-language-select"></div>
+                                            </div>
+                                            <div class="yni-tone-group ui-yni-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Tone(Yes/No/Instruct)</strong></label>
+                                                </div>
+                                                <div class="ui-yni-tone-select"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="mb-2">
+                                                <h4>API Wording</h4>
+                                            </div>
+                                            <div class="role-group mb-4 api-role-group">
+                                                <div>
+                                                    <label class="form-label"><strong>Agent Role</strong></label>
+                                                </div>
+                                                <div class="api-role-select"></div>
+                                            </div>
+                                            <div class="sentiment-group mb-4 api-sentiment-group">
+                                                <div>
+                                                    <label class="form-label"><strong>Current Customer Sentiment</strong></label>
+                                                </div>
+                                                <div class="api-sentiment-select"></div>
+                                            </div>
+                                            <div class="tone-group api-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Reply Tone</strong></label>
+                                                </div>
+                                                <div class="api-tone-select"></div>
+                                            </div>
+                                            <div class="language-group api-language-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Language</strong></label>
+                                                </div>
+                                                <div class="api-language-select"></div>
+                                            </div>
+                                            <div class="yni-tone-group api-yni-tone-group mb-4">
+                                                <div>
+                                                    <label class="form-label"><strong>Tone(Yes/No/Instruct)</strong></label>
+                                                </div>
+                                                <div class="api-yni-tone-select"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-12 col-md-12 col-xl-8 text-center">
+                                            <button type="button" class="btn btn-primary fw-bold" id="submit_config">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/siteScript/jquery.min.js"></script>
+    <script src="/static/js/siteScript/popper.min.js"></script>
+    <script src="/static/js/siteScript/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/siteScript/dataTable.js"></script>
+    <script src="/static/js/siteScript/dataTables.responsive.min.js"></script>
+    <script src="/static/js/siteScript/dataTable.select.min.js"></script>
+    <script src="/static/js/appScript/admin_dash.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" ></script>
+  </body>
+</html>

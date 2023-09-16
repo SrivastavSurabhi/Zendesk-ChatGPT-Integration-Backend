@@ -1,0 +1,8 @@
+*.log
+*.pyc
+/__pycache__
+media
+/.idea/
+../.idea/
+/word_env/
+.env
